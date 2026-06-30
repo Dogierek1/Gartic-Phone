@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gartic Phone Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div id="screen-login" class="screen active">
+            <div class="glass-card">
+                <h1>Gartic Phone</h1>
+                <input type="text" id="player-name" placeholder="Enter your name..." autocomplete="off">
+                <input type="text" id="room-id" placeholder="Room ID..." autocomplete="off">
+                <button id="btn-join">Join Room</button>
+            </div>
+        </div>
+
+        <div id="screen-lobby" class="screen">
+            <div class="glass-card lobby-card">
+                <h2>Lobby <span id="lobby-room-id"></span></h2>
+                
+                <div id="admin-settings" class="inset-box">
+                    <div class="setting-row">
+                        <label>Game Mode:</label>
+                        <div class="mode-selector">
+                            <button id="btn-mode-normal" class="mode-btn active" type="button">Normal</button>
+                            <button id="btn-mode-story" class="mode-btn" type="button">Story</button>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <label>Max Rounds:</label>
+                        <input type="number" id="setting-rounds" min="1" max="20" value="4">
+                    </div>
+                    <div class="setting-row">
+                        <label>Time per Turn (s):</label>
+                        <input type="number" id="setting-time" min="10" max="300" value="60">
+                    </div>
+                </div>
+
+                <ul id="players-list"></ul>
+                <button id="btn-start" style="display: none;">Force Start Game</button>
+            </div>
+        </div>
+
+        <div id="screen-game" class="screen">
+            <div class="glass-card game-card">
+                <div id="timer-display">60</div>
+                <div id="game-header"></div>
+                <div id="previous-entry-container" class="inset-box"></div>
+                
+                <div id="input-text-container" class="game-input-area inset-box">
+                    <input type="text" id="game-text-input" placeholder="Type here..." autocomplete="off">
+                </div>
+
+                <div id="input-draw-container" class="game-input-area inset-box">
+                    <div class="toolbar">
+                        <input type="color" id="color-picker" value="#ffffff">
+                        <input type="range" id="brush-size" min="1" max="20" value="5">
+                        <button id="btn-clear">Clear</button>
+                    </div>
+                    <canvas id="drawing-canvas" width="800" height="400"></canvas>
+                </div>
+
+                <button id="btn-submit">Submit</button>
+            </div>
+        </div>
+
+        <div id="screen-results" class="screen">
+            <div class="glass-card results-card">
+                <div class="results-layout">
+                    <div class="results-left">
+                        <h2>Players</h2>
+                        <ul id="results-players-list"></ul>
+                        <button id="btn-play-again" style="display: none;">Play Again</button>
+                    </div>
+                    <div class="results-right">
+                        <h2>Chain History</h2>
+                        <div id="chain-view-container">
+                            <p class="placeholder-text">Select a player to view their chain!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
